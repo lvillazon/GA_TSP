@@ -21,8 +21,8 @@ public class GeneticAlgorithm {
         return new Population(populationSize, chromosomeLength);
     }
 
-    public double calculateFitness(Individual member) {
-        // inverse of the total route length
+    public int getRouteLength(Individual member) {
+        // distance between each city along the tour
         int routeLength = 0;
         int leg = 0;
         City home = new City('X');
@@ -38,6 +38,12 @@ public class GeneticAlgorithm {
         // don't forget the last leg, to return home
         leg = a.distanceFrom(home);
         routeLength = routeLength + leg;
+        return routeLength;
+    }
+
+    public double calculateFitness(Individual member) {
+        // inverse of the total route length
+        int routeLength = getRouteLength(member);
 
         // calculate reciprocal, so shorter tours = higher fitness
         double fitness = 1/(double)routeLength;

@@ -9,6 +9,15 @@ public class Individual {
         fitness = -1;
     }
 
+    public Individual(String route) {
+        // allow construction from a string of city codes
+        chromosome = new City[route.length()];
+        for (int i=0; i<route.toCharArray().length; i++) {
+            chromosome[i] = new City(route.toCharArray()[i]);
+        }
+        fitness = -1;
+    }
+
     public Individual(int chromosomeLength) {
         // initialise with random genes
         chromosome = new City[chromosomeLength];

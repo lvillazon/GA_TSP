@@ -8,6 +8,7 @@ import java.awt.geom.Line2D;
 class Map extends JComponent {
     private int WIDTH;
     private int HEIGHT;
+    private String baseTitle;
     private JFrame window;
     private char[] route;
     private char[] cityNames = {'X','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T'};
@@ -34,9 +35,10 @@ class Map extends JComponent {
             {225,19}, //S
             {125,75}  //T
     };
-    public Map(String title, int width, int height) {
+    public Map(String title, int width, int height, int xpos, int ypos) {
         this.WIDTH = width;
         this.HEIGHT = height;
+        this.baseTitle = title;
 
         // creating object of JFrame(Window popup)
         window = new JFrame(title);
@@ -45,7 +47,7 @@ class Map extends JComponent {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // setting size of the pop window
-        window.setBounds(30, 30, width, height+50);
+        window.setBounds(xpos, ypos, width, height+50);
 
         // setting canvas for draw
         window.getContentPane().add(this);
@@ -55,8 +57,9 @@ class Map extends JComponent {
 
     }
 
-    public void setRoute(String route) {
+    public void setRoute(String route, int length) {
         this.route = route.toCharArray();
+        window.setTitle(baseTitle + " distance: " + Integer.toString(length) +"km");
         repaint();
     }
 
